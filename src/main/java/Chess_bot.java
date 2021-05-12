@@ -16,12 +16,18 @@ public class Chess_bot extends TelegramLongPollingBot {
         sendMessage.setReplyMarkup(replyKeyboardMarkup);
         replyKeyboardMarkup.setResizeKeyboard(true);
         replyKeyboardMarkup.setSelective(true);
-        replyKeyboardMarkup.setOneTimeKeyboard(true);
+        replyKeyboardMarkup.setOneTimeKeyboard(false);
 
         List<KeyboardRow> keyboardRowList = new ArrayList<>();
         KeyboardRow keyboardRow1 = new KeyboardRow();
-        keyboardRow1.add(new KeyboardButton("Кто Я?"));
+        KeyboardRow keyboardRow2 = new KeyboardRow();
+        KeyboardRow keyboardRow3 = new KeyboardRow();
+        keyboardRow1.add(new KeyboardButton("новичок"));
+        keyboardRow2.add(new KeyboardButton("любитель"));
+        keyboardRow3.add(new KeyboardButton("мастер"));
         keyboardRowList.add(keyboardRow1);
+        keyboardRowList.add(keyboardRow2);
+        keyboardRowList.add(keyboardRow3);
         replyKeyboardMarkup.setKeyboard(keyboardRowList);
     }
 
@@ -43,8 +49,9 @@ public class Chess_bot extends TelegramLongPollingBot {
         Message message = update.getMessage();
         if (message != null && message.hasText()) {
             switch (message.getText()) {
-                case "/help" -> SendMsg(message, "Чем могу быть полезен?");
                 case "Привет" -> SendMsg(message, "Здарова!");
+                case "/start" -> SendMsg(message, "Привет! Выбери свой уровень владения шахматным искусством:");
+                case "новичок" -> SendMsg(message, "Начнем тренировку");
             }
         }
     }
