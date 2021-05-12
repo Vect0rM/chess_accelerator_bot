@@ -11,34 +11,47 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Chess_bot extends TelegramLongPollingBot {
-    public  void SetButtons(SendMessage sendMessage){
+    public List<KeyboardRow> Beginner(){
+        List<KeyboardRow> keyboardRowList2 = new ArrayList<>();
+        KeyboardRow keyboardRow1 = new KeyboardRow();
+        KeyboardRow keyboardRow2 = new KeyboardRow();
+        KeyboardRow keyboardRow3 = new KeyboardRow();
+        keyboardRow1.add(new KeyboardButton("1"));
+        keyboardRow2.add(new KeyboardButton("2"));
+        keyboardRow3.add(new KeyboardButton("3"));
+        keyboardRowList2.add(keyboardRow1);
+        keyboardRowList2.add(keyboardRow2);
+        keyboardRowList2.add(keyboardRow3);
+        return keyboardRowList2;
+    }
+    public List<KeyboardRow> Start(){
+        List<KeyboardRow> keyboardRowList1 = new ArrayList<>();
+        KeyboardRow keyboardRow1 = new KeyboardRow();
+        KeyboardRow keyboardRow2 = new KeyboardRow();
+        KeyboardRow keyboardRow3 = new KeyboardRow();
+        keyboardRow1.add(new KeyboardButton("Новичок"));
+        keyboardRow2.add(new KeyboardButton("Любитель"));
+        keyboardRow3.add(new KeyboardButton("Мастер"));
+        keyboardRowList1.add(keyboardRow1);
+        keyboardRowList1.add(keyboardRow2);
+        keyboardRowList1.add(keyboardRow3);
+        return keyboardRowList1;
+    }
+    public void SendMsg(Message message, List<KeyboardRow> keyboardRowList ,String text) {
+        SendMessage sendMessage = new SendMessage();
         ReplyKeyboardMarkup replyKeyboardMarkup = new ReplyKeyboardMarkup();
         sendMessage.setReplyMarkup(replyKeyboardMarkup);
         replyKeyboardMarkup.setResizeKeyboard(true);
         replyKeyboardMarkup.setSelective(true);
         replyKeyboardMarkup.setOneTimeKeyboard(false);
-
-        List<KeyboardRow> keyboardRowList = new ArrayList<>();
-        KeyboardRow keyboardRow1 = new KeyboardRow();
-        KeyboardRow keyboardRow2 = new KeyboardRow();
-        KeyboardRow keyboardRow3 = new KeyboardRow();
-        keyboardRow1.add(new KeyboardButton("новичок"));
-        keyboardRow2.add(new KeyboardButton("любитель"));
-        keyboardRow3.add(new KeyboardButton("мастер"));
-        keyboardRowList.add(keyboardRow1);
-        keyboardRowList.add(keyboardRow2);
-        keyboardRowList.add(keyboardRow3);
         replyKeyboardMarkup.setKeyboard(keyboardRowList);
-    }
 
-    public void SendMsg(Message message, String text) {
-        SendMessage sendMessage = new SendMessage();
         sendMessage.enableMarkdown(true);
         sendMessage.setChatId(message.getChatId().toString());
      // sendMessage.setReplyToMessageId(message.getMessageId()); - Ответ на сообщ
         sendMessage.setText(text);
         try {
-            SetButtons(sendMessage);
+
             execute(sendMessage);
         } catch (TelegramApiException e){
             e.printStackTrace();
@@ -47,11 +60,12 @@ public class Chess_bot extends TelegramLongPollingBot {
     @Override
     public void onUpdateReceived(Update update) {
         Message message = update.getMessage();
+
         if (message != null && message.hasText()) {
             switch (message.getText()) {
-                case "Привет" -> SendMsg(message, "Здарова!");
-                case "/start" -> SendMsg(message, "Привет! Выбери свой уровень владения шахматным искусством:");
-                case "новичок" -> SendMsg(message, "Начнем тренировку");
+                //case "Привет" -> SendMsg(message, "Здарова!");
+                case "/start" -> SendMsg(message,Start() ,"Привет! Выбери свой уровень владения шахматным искусством:");
+                case "Новичок" -> SendMsg(message,Beginner() ,"Начнем тренировку");
             }
         }
     }
