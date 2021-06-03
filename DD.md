@@ -6,7 +6,9 @@
     - Выбор стороны
     - Набор шахматных этюдов
 - ###Порядок выполнения ключевых бизнес-процессов
-![GitHub Logo](images/Untitled Diagram.png)
+
+![Image alt](https://github.com/Vect0rM/chess_accelerator_bot/raw/master/Images/Untitled%20Diagram.png)
+
 #Структура проекта  
 ###Chess_bot - Class
 Это класс, расширяющий TelegramLongPollingBot (класс, созданный @rubenlagus)
