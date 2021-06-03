@@ -6,7 +6,7 @@
     - Выбор стороны
     - Набор шахматных этюдов
 - ### Порядок выполнения ключевых бизнес-процессов
-! [GitHub Logo] (images/Untitled Diagram.png)
+ ![GitHub Logo](images/Untitled Diagram.png)
 # Структура проекта  
 ### Chess_bot - Class
 Это класс, расширяющий TelegramLongPollingBot (класс, созданный @rubenlagus)
