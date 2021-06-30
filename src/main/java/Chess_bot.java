@@ -18,6 +18,7 @@ public class Chess_bot extends TelegramLongPollingBot {
     public int CounterAns = 0;
     public int Completed = 0;
 
+     
     public Map<Integer, InputFile> EtudeW(){
         Map<Integer, InputFile> questionAns = new HashMap<>();
         InputFile b1 = new InputFile("https://chessok.net/uploads/posts/2020-08/1598705644_prostoj-i-prijatnyj-mat-v-1-hod_-reshi-za-10-sekund.jpg");
